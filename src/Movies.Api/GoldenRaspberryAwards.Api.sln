@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35514.174
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenRaspberryAwards.Api", "GoldenRaspberryAwards.Api.csproj", "{4D56359B-34FB-44E7-AFA7-46ED75D7FC1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenRaspberryAwards.Application", "..\GoldenRaspberryAwards.Application\GoldenRaspberryAwards.Application.csproj", "{EDC1667F-1AA4-4005-9EEB-7CD6B542886B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenRaspberryAwards.Domain", "..\GoldenRaspberryAwards.Domain\GoldenRaspberryAwards.Domain.csproj", "{6D22494D-A7DE-49CB-99AF-77DE4494068B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenRaspberryAwards.Infrastructure", "..\GoldenRaspberryAwards.Infrastructure\GoldenRaspberryAwards.Infrastructure.csproj", "{BB737D2D-C261-46CC-AD16-20C1F6520E86}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4D56359B-34FB-44E7-AFA7-46ED75D7FC1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D56359B-34FB-44E7-AFA7-46ED75D7FC1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D56359B-34FB-44E7-AFA7-46ED75D7FC1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D56359B-34FB-44E7-AFA7-46ED75D7FC1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDC1667F-1AA4-4005-9EEB-7CD6B542886B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDC1667F-1AA4-4005-9EEB-7CD6B542886B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDC1667F-1AA4-4005-9EEB-7CD6B542886B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDC1667F-1AA4-4005-9EEB-7CD6B542886B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D22494D-A7DE-49CB-99AF-77DE4494068B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D22494D-A7DE-49CB-99AF-77DE4494068B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D22494D-A7DE-49CB-99AF-77DE4494068B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D22494D-A7DE-49CB-99AF-77DE4494068B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB737D2D-C261-46CC-AD16-20C1F6520E86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB737D2D-C261-46CC-AD16-20C1F6520E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB737D2D-C261-46CC-AD16-20C1F6520E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB737D2D-C261-46CC-AD16-20C1F6520E86}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
