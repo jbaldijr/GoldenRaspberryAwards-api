@@ -3,11 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GoldenRaspberryAwards.Infrastructure.Context
 {
-    public class MovieContext : DbContext
+    public class MovieContext(DbContextOptions<MovieContext> options) : DbContext(options)
     {
-        public DbSet<Movie> Movies { get; set; }
-
-        public MovieContext(DbContextOptions<MovieContext> options) : base(options) { }
+        public required DbSet<Movie> Movies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

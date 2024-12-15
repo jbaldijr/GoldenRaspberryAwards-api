@@ -6,7 +6,7 @@ namespace GoldenRaspberryAwards.Domain.Interfaces
     public interface IMovieService
     {
         Task<int> ProcessCsvFileAsync(IFormFile file);
-        Task<object> GetProducersAwardIntervalsAsync();
+        Task<IntervalResult> GetProducersAwardIntervalsAsync();
         Task<List<Movie>> GetAllMoviesAsync();
     }
 }

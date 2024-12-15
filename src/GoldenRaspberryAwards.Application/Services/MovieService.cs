@@ -37,36 +37,44 @@ namespace GoldenRaspberryAwards.Application.Services
             return movies.Count;
         }
 
-        public async Task<object> GetProducersAwardIntervalsAsync()
+        public async Task<IntervalResult> GetProducersAwardIntervalsAsync()
         {
             var producers = _context.Movies
                 .Where(m => m.IsWinner)
-                .GroupBy(m => m.Producers)
+                .AsEnumerable()
+                .SelectMany(m => m.Producers
+                    .Split(new[] { ",", " and " }, StringSplitOptions.TrimEntries)
+                    .Select(producer => new { Producer = producer, Year = m.Year }))
+                .GroupBy(p => p.Producer)
                 .Select(g => new
                 {
                     Producer = g.Key,
-                    Awards = g.OrderBy(m => m.Year).Select(m => m.Year).ToList()
+                    Wins = g.Select(p => p.Year).OrderBy(year => year).ToList()
                 })
+                .Where(p => p.Wins.Count > 1)
                 .ToList();
 
-            var intervals = producers
-                .Where(p => p.Awards.Count > 1) // Verifica se há mais de um prêmio
-                .Select(p => new
-                {
-                    Producer = p.Producer,
-                    MinInterval = p.Awards.Skip(1).Zip(p.Awards, (a, b) => a - b).Min(),
-                    MaxInterval = p.Awards.Skip(1).Zip(p.Awards, (a, b) => a - b).Max()
-                });
-
-            var min = intervals.OrderBy(i => i.MinInterval).FirstOrDefault();
-            var max = intervals.OrderByDescending(i => i.MaxInterval).FirstOrDefault();
-
-            return new
+            var intervals = producers.SelectMany(p => p.Wins.Zip(p.Wins.Skip(1), (prev, next) => new ProducerInterval
             {
-                Min = min,
-                Max = max
+                Producer = p.Producer,
+                Interval = next - prev,
+                PreviousWin = prev,
+                FollowingWin = next
+            }));
+
+            var minInterval = intervals.GroupBy(i => i.Interval).OrderBy(g => g.Key).FirstOrDefault();
+            var maxInterval = intervals.GroupBy(i => i.Interval).OrderByDescending(g => g.Key).FirstOrDefault();
+
+            return new IntervalResult
+            {
+                Min = minInterval?.ToList() ?? new List<ProducerInterval>(),
+                Max = maxInterval?.ToList() ?? new List<ProducerInterval>()
             };
         }
+
+
+
+
 
 
         private static List<Movie> ImportMoviesFromStream(Stream stream)
