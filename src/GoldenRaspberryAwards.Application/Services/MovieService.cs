@@ -37,11 +37,14 @@ namespace GoldenRaspberryAwards.Application.Services
             return movies.Count;
         }
 
+
         public async Task<IntervalResult> GetProducersAwardIntervalsAsync()
         {
-            var producers = _context.Movies
+            var movies = await _context.Movies
                 .Where(m => m.IsWinner)
-                .AsEnumerable()
+                .ToListAsync(); // Consulta assíncrona ao banco
+
+            var producers = movies
                 .SelectMany(m => m.Producers
                     .Split(new[] { ",", " and " }, StringSplitOptions.TrimEntries)
                     .Select(producer => new { Producer = producer, Year = m.Year }))
@@ -71,11 +74,6 @@ namespace GoldenRaspberryAwards.Application.Services
                 Max = maxInterval?.ToList() ?? new List<ProducerInterval>()
             };
         }
-
-
-
-
-
 
         private static List<Movie> ImportMoviesFromStream(Stream stream)
         {
@@ -108,9 +106,15 @@ namespace GoldenRaspberryAwards.Application.Services
             Map(m => m.Producers).Name("producers");
             Map(m => m.IsWinner).Name("winner").Convert(args =>
             {
-                var field = args.Row.TryGetField("winner", out string value) ? value : null;
-                return value?.Equals("yes", StringComparison.OrdinalIgnoreCase) ?? false;
+                // Verifica se o campo "winner" existe e tenta obter seu valor
+                string value = args.Row.GetField("winner") ?? string.Empty;
+
+                // Caso o valor seja nulo, vazio ou não seja "yes", retorna false
+                return !string.IsNullOrWhiteSpace(value) &&
+                       value.Equals("yes", StringComparison.OrdinalIgnoreCase);
             });
         }
     }
+
+
 }

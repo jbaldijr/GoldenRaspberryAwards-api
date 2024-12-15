@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenRaspberryAwards.Domai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenRaspberryAwards.Infrastructure", "..\GoldenRaspberryAwards.Infrastructure\GoldenRaspberryAwards.Infrastructure.csproj", "{BB737D2D-C261-46CC-AD16-20C1F6520E86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenRaspberryAwards.Tests.Integration", "..\GoldenRaspberryAwards.Tests.Integration\GoldenRaspberryAwards.Tests.Integration.csproj", "{9DC4C195-3838-4116-AF98-26EE54B08D03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{BB737D2D-C261-46CC-AD16-20C1F6520E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB737D2D-C261-46CC-AD16-20C1F6520E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB737D2D-C261-46CC-AD16-20C1F6520E86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DC4C195-3838-4116-AF98-26EE54B08D03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DC4C195-3838-4116-AF98-26EE54B08D03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DC4C195-3838-4116-AF98-26EE54B08D03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DC4C195-3838-4116-AF98-26EE54B08D03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
