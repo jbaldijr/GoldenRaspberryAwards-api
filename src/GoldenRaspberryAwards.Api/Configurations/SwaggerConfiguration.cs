@@ -1,6 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using System.Reflection;
 
 namespace GoldenRaspberryAwards.Api.Configurations
 {
@@ -8,7 +9,23 @@ namespace GoldenRaspberryAwards.Api.Configurations
     {
         public static void ConfigureSwaggerGen(SwaggerGenOptions options)
         {
-            options.SwaggerDoc("v1", new OpenApiInfo { Title = "Golden Raspberry Awards API", Version = "v1" });
+            options.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "Golden Raspberry Awards API",
+                Version = "v1",
+                Description = "API para processar arquivos CSV de filmes e obter informações sobre os produtores com os menores e maiores intervalos entre premiações.",
+                Contact = new OpenApiContact
+                {
+                    Name = "João Carlos Baldi Júnior",
+                    Email = "joao.baldi@icloud.com",
+                    Url = new Uri("https://github.com/jbaldijr"),
+                },
+                License = new OpenApiLicense
+                {
+                    Name = "MIT License",
+                    Url = new Uri("https://opensource.org/licenses/MIT"),
+                }
+            });
 
             // Configuração para upload de arquivos
             options.MapType<IFormFile>(() => new OpenApiSchema
@@ -17,6 +34,9 @@ namespace GoldenRaspberryAwards.Api.Configurations
                 Format = "binary"
             });
             options.OperationFilter<FileUploadOperationFilter>();
+
+            var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
         }
 
         public static void ConfigureSwaggerUI(SwaggerUIOptions options)
