@@ -43,16 +43,15 @@ namespace GoldenRaspberryAwards.Tests.Integration.ControllersTests
         public async Task GetProducersIntervals_ShouldReturnCorrectIntervals()
         {
 
-            // Act: Chamar o endpoint que retorna os intervalos
+            // Act
             var response = await _client.GetAsync("/api/movies/producers/intervals");
 
-            // Assert: Verificar o resultado
+            // Assert
             response.EnsureSuccessStatusCode();
 
             var result = await response.Content.ReadFromJsonAsync<IntervalResult>();
             result.Should().NotBeNull();
 
-            // Validar os intervalos mínimos e máximos
             result?.Min.Should().ContainSingle(p => p.Producer == "Producer 1" && p.Interval == 1);
             result?.Max.Should().ContainSingle(p => p.Producer == "Producer 1" && p.Interval == 99);
         }

@@ -26,11 +26,9 @@ namespace GoldenRaspberryAwards.Application.Services
             using var stream = file.OpenReadStream();
             var movies = ImportMoviesFromStream(stream);
 
-            // Limpar banco antes de inserir novos registros
             _context.Movies.RemoveRange(_context.Movies);
             await _context.SaveChangesAsync();
 
-            // Adicionar novos registros
             await _context.Movies.AddRangeAsync(movies);
             await _context.SaveChangesAsync();
 
@@ -42,7 +40,7 @@ namespace GoldenRaspberryAwards.Application.Services
         {
             var movies = await _context.Movies
                 .Where(m => m.IsWinner)
-                .ToListAsync(); // Consulta assíncrona ao banco
+                .ToListAsync();
 
             var producers = movies
                 .SelectMany(m => m.Producers
@@ -80,14 +78,14 @@ namespace GoldenRaspberryAwards.Application.Services
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 Delimiter = ";",
-                HeaderValidated = null, // Ignore missing headers
-                MissingFieldFound = null // Ignore missing fields
+                HeaderValidated = null,
+                MissingFieldFound = null
             };
 
             using var reader = new StreamReader(stream);
             using var csv = new CsvReader(reader, config);
 
-            csv.Context.RegisterClassMap<MovieMap>(); // Registra o mapeamento
+            csv.Context.RegisterClassMap<MovieMap>();
             return csv.GetRecords<Movie>().ToList();
         }
 
@@ -106,10 +104,8 @@ namespace GoldenRaspberryAwards.Application.Services
             Map(m => m.Producers).Name("producers");
             Map(m => m.IsWinner).Name("winner").Convert(args =>
             {
-                // Verifica se o campo "winner" existe e tenta obter seu valor
                 string value = args.Row.GetField("winner") ?? string.Empty;
 
-                // Caso o valor seja nulo, vazio ou não seja "yes", retorna false
                 return !string.IsNullOrWhiteSpace(value) &&
                        value.Equals("yes", StringComparison.OrdinalIgnoreCase);
             });

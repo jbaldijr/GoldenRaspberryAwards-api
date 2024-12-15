@@ -10,18 +10,15 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Adiciona serviços ao container
         ConfigureServices(builder);
 
         var app = builder.Build();
 
-        // Configura o pipeline HTTP
         ConfigurePipeline(app);
 
         app.Run();
     }
 
-    // Expor o método para WebApplicationFactory nos testes
     public static WebApplicationBuilder CreateWebApplicationBuilder(string[] args) =>
         WebApplication.CreateBuilder(args);
 
@@ -37,7 +34,6 @@ public class Program
 
     private static void ConfigurePipeline(WebApplication app)
     {
-        // Configura o Swagger apenas no ambiente de desenvolvimento
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
