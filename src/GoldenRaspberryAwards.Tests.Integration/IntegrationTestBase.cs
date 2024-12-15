@@ -46,10 +46,18 @@ namespace GoldenRaspberryAwards.Tests.Integration
         {
             context.Movies.AddRange(new[]
             {
-                new Movie { Year = 2008, Title = "Movie A", Studios = "Studio A", Producers = "Producer 1", IsWinner = true },
-                new Movie { Year = 2009, Title = "Movie B", Studios = "Studio B", Producers = "Producer 1", IsWinner = true },
-                new Movie { Year = 1900, Title = "Movie C", Studios = "Studio C", Producers = "Producer 1", IsWinner = true },
-                new Movie { Year = 1999, Title = "Movie D", Studios = "Studio D", Producers = "Producer 1", IsWinner = true }
+                new Movie { Year = 2000, Title = "Movie A1", Studios = "Studio A", Producers = "Producer A", IsWinner = true },
+                new Movie { Year = 2002, Title = "Movie A2", Studios = "Studio A", Producers = "Producer A", IsWinner = true },
+
+                new Movie { Year = 2001, Title = "Movie B1", Studios = "Studio B", Producers = "Producer B", IsWinner = true },
+                new Movie { Year = 2003, Title = "Movie B2", Studios = "Studio B", Producers = "Producer B", IsWinner = true },
+
+                // Dados para intervalo máximo (100 anos de diferença)
+                new Movie { Year = 1900, Title = "Movie C1", Studios = "Studio C", Producers = "Producer C", IsWinner = true },
+                new Movie { Year = 2000, Title = "Movie C2", Studios = "Studio C", Producers = "Producer C", IsWinner = true },
+
+                new Movie { Year = 1905, Title = "Movie D1", Studios = "Studio D", Producers = "Producer D", IsWinner = true },
+                new Movie { Year = 2005, Title = "Movie D2", Studios = "Studio D", Producers = "Producer D", IsWinner = true }
             });
             context.SaveChanges();
         }

@@ -52,8 +52,14 @@ namespace GoldenRaspberryAwards.Tests.Integration.ControllersTests
             var result = await response.Content.ReadFromJsonAsync<IntervalResult>();
             result.Should().NotBeNull();
 
-            result?.Min.Should().ContainSingle(p => p.Producer == "Producer 1" && p.Interval == 1);
-            result?.Max.Should().ContainSingle(p => p.Producer == "Producer 1" && p.Interval == 99);
+            result?.Min.Should().HaveCount(2);
+            result?.Min.Should().Contain(p => p.Producer == "Producer A" && p.Interval == 2);
+            result?.Min.Should().Contain(p => p.Producer == "Producer B" && p.Interval == 2);
+
+  
+            result?.Max.Should().HaveCount(2);
+            result?.Max.Should().Contain(p => p.Producer == "Producer C" && p.Interval == 100);
+            result?.Max.Should().Contain(p => p.Producer == "Producer D" && p.Interval == 100);
         }
 
         private byte[] LoadEmbeddedResource(string resourceName)
