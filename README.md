@@ -1,92 +1,72 @@
-# Golden Raspberry Awards API
+# **Golden Raspberry Awards API**
 
-## Visão Geral
-A **Golden Raspberry Awards API** é uma aplicação desenvolvida para processar e consultar informações relacionadas aos piores filmes premiados. Com esta API, você pode:
+## **Visão Geral**
 
-- Fazer upload de arquivos CSV contendo dados de filmes.
-- Consultar todos os filmes importados.
-- Consultar intervalos de premiação de produtores.
-
-## Funcionalidades Principais
-
-### Endpoints
-
-#### 1. Upload de CSV
-- **Método**: `POST`
-- **Rota**: `/api/movies/upload`
-- **Descrição**: Permite o upload de um arquivo CSV contendo dados de filmes.
-- **Corpo da Requisição**:
-  - `file` (form-data): Arquivo CSV contendo os campos:
-    - `year`
-    - `title`
-    - `studios`
-    - `producers`
-    - `winner` (valores `yes` ou `no` para indicar se é vencedor).
-
-#### 2. Consultar Todos os Filmes
-- **Método**: `GET`
-- **Rota**: `/api/movies/all`
-- **Descrição**: Retorna todos os filmes importados na base de dados.
-
-#### 3. Consultar Intervalos de Premiação
-- **Método**: `GET`
-- **Rota**: `/api/movies/producers/intervals`
-- **Descrição**: Retorna os intervalos mínimos e máximos entre prêmios dos produtores vencedores.
+A **Golden Raspberry Awards API** é uma aplicação desenvolvida para processar e consultar informações de filmes, identificando os **produtores com os menores e maiores intervalos entre vitórias** no prêmio Golden Raspberry Awards. A API permite o upload de arquivos CSV contendo os dados dos filmes e expõe endpoints para consultas.
 
 ---
 
-## Estrutura do Projeto
+## **Funcionalidades**
 
-A aplicação segue uma estrutura modular, dividida em:
-
-1. **Domain**: Contém as interfaces e modelos de dados principais.
-2. **Infrastructure**: Responsável pelo acesso ao banco de dados.
-3. **Application**: Contém os serviços de negócios e lógica de processamento.
-4. **API**: Controladores que expõem os endpoints.
+- **Upload de Arquivo CSV**: Processa um arquivo contendo dados de filmes.
+- **Consulta de Intervalos de Prêmios**: Identifica os produtores com os **menores** e **maiores** intervalos entre vitórias.
+- **Consulta de Todos os Filmes**: Retorna todos os filmes carregados no banco de dados.
 
 ---
 
-## Como Executar a Aplicação
+## **Tecnologias Utilizadas**
 
-### Pré-requisitos
-- .NET SDK 6.0 ou superior.
-- Ambiente de desenvolvimento configurado (Visual Studio, VS Code, ou CLI).
+- **.NET 8** (Web API)
+- **Entity Framework Core** (InMemory Database)
+- **CsvHelper** (Leitura de arquivos CSV)
+- **Swashbuckle** (Swagger UI para documentação da API)
+- **XUnit** (Testes de Integração)
+- **FluentAssertions** (Validação em testes)
 
-### Passos
-1. Clone este repositório:
-   ```bash
-   git clone <URL_DO_REPOSITORIO>
-   ```
+---
 
-2. Navegue até o diretório do projeto:
-   ```bash
-   cd GoldenRaspberryAwards-api
-   ```
+## **Pré-requisitos**
 
-3. Restaure as dependências:
-   ```bash
-   dotnet restore
-   ```
+Para executar a aplicação, você precisará de:
 
-4. Inicie a aplicação:
-   ```bash
-   dotnet run
-   ```
+- **.NET SDK 8.0** ou superior.
+- Ferramenta de desenvolvimento: **Visual Studio**, **Visual Studio Code** ou **CLI do .NET**.
 
-5. Acesse a interface do Swagger para explorar os endpoints:
-   ```
-http://localhost:<PORTA>/swagger
+---
+
+## **Execução da Aplicação**
+
+### **1. Clone o Repositório**
+
+```bash
+git clone https://github.com/jbaldijr/GoldenRaspberryAwards-api.git
+```
+### **2. Navegue até o endereço onde clonou o repositório**
+
+```bash
+cd GoldenRaspberryAwards-api/src
 ```
 
----
+### **3. Restaure as Dependências**
 
-## Documentação Avançada
+```bash
+dotnet restore GoldenRaspberryAwards.Api 
+```
+### **4. Rode os testes**
+```bash
+dotnet test GoldenRaspberryAwards.Tests.Integration/GoldenRaspberryAwards.Tests.Integration.csproj
+```
 
-Para detalhes adicionais sobre:
+### **5. Execute a Aplicação**
 
-- **Formato do CSV esperado**
-- **Exemplos de uso de cada endpoint**
-- **Configurações avançadas da API**
+```bash
+dotnet run --project GoldenRaspberryAwards.Api
+```
 
-Consulte a pasta [docs](./docs/README.md).
+### **6. Acesse o Swagger**
+A documentação dos endpoints estará disponível em:
+```bash
+http://localhost:5096/swagger/index.html
+```
+
 
